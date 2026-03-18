@@ -670,6 +670,10 @@
     document.querySelectorAll('.device-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     selectedDevice = device;
+    const url = document.getElementById('urlInput').value.trim();
+    if (url && url.startsWith('http') && document.getElementById('results').style.display !== 'none') {
+      analyze();
+    }
   }
 
   /* ── HELPERS ────────────────────────────────────────────────────────────── */
