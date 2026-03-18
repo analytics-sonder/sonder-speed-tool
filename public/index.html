@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -722,9 +723,7 @@
     document.getElementById('analyzeBtn').disabled = true;
     startSteps();
 
-    // Fire-and-forget: log this analysis attempt
     const timestamp = new Date().toISOString();
-    logAnalysis({ url, device: selectedDevice, timestamp, userAgent: navigator.userAgent, referrer: document.referrer });
 
     try {
       const res = await fetch('/.netlify/functions/analyze', {
@@ -740,14 +739,14 @@
       lastAnalyzedUrl = url;
       lastScores = result.scores;
 
-      // Update the log with actual scores
+      // Non-blocking log
       logAnalysis({ url, device: selectedDevice, timestamp, scores: result.scores, userAgent: navigator.userAgent, referrer: document.referrer });
 
       renderResults(url, result);
     } catch (err) {
       stopSteps();
       document.getElementById('loading').style.display = 'none';
-      showError('Analysis failed. Please try again with a valid URL.');
+      showError('Analysis failed: ' + err.message);
       console.error(err);
     }
 
