@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY SEO ──────────────────────────────────────────────────────── -->
+  <title>Free Website Speed Test & Page Speed Checker | Sonder Digital</title>
+  <meta name="description" content="Test your website speed instantly. Get Core Web Vitals scores, LCP, FCP, CLS metrics, and expert SEO/AEO optimisation recommendations — free tool by Sonder Digital." />
+  <meta name="keywords" content="website speed test, page speed checker, core web vitals, LCP, FCP, CLS, pagespeed insights, website performance test, free speed test, SEO speed optimisation, AEO optimisation, web performance tool" />
+  <link rel="canonical" href="https://pagespeed.sonderdigital.com/" />
+
+  <!-- ── OPEN GRAPH ────────────────────────────────────────────────────────── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pagespeed.sonderdigital.com/" />
+  <meta property="og:title" content="Free Website Speed Test & Core Web Vitals Checker | Sonder Digital" />
+  <meta property="og:description" content="Instantly analyse your website speed, Core Web Vitals and SEO performance. Get expert recommendations from Sonder Digital's free AI-powered tool." />
+  <meta property="og:image" content="https://pagespeed.sonderdigital.com/assets/og-image.png" />
+  <meta property="og:site_name" content="Sonder Digital" />
+
+  <!-- ── TWITTER CARD ──────────────────────────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@SonderDigital" />
+  <meta name="twitter:title" content="Free Website Speed Test | Sonder Digital" />
+  <meta name="twitter:description" content="Check your Core Web Vitals, LCP, FCP & CLS scores instantly. Free AI-powered page speed analyser." />
+  <meta name="twitter:image" content="https://pagespeed.sonderdigital.com/assets/og-image.png" />
+
+  <!-- ── STRUCTURED DATA (FAQ + WebApplication) ────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Sonder Digital Website Speed Test",
+        "url": "https://pagespeed.sonderdigital.com/",
+        "description": "Free AI-powered website speed and Core Web Vitals analyser. Get instant LCP, FCP, CLS, TBT scores and expert SEO recommendations.",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "Sonder Digital", "url": "https://sonderdigital.com" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a good website speed score?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Google Lighthouse rates 90–100 as Good (green), 50–89 as Needs Improvement (amber), and 0–49 as Poor (red). For Core Web Vitals, aim for LCP under 2.5 s, FCP under 1.8 s, and CLS under 0.1." }
+          },
+          {
+            "@type": "Question",
+            "name": "What are Core Web Vitals?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Core Web Vitals are Google's key page-experience metrics: Largest Contentful Paint (LCP) measures loading speed, Interaction to Next Paint (INP) measures responsiveness, and Cumulative Layout Shift (CLS) measures visual stability. They are a confirmed Google ranking factor." }
+          },
+          {
+            "@type": "Question",
+            "name": "How does page speed affect SEO?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Page speed is a direct Google ranking signal. Slow sites rank lower, have higher bounce rates, and convert fewer visitors. Improving Core Web Vitals scores can lift organic rankings and improve conversion rate by up to 20%." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is AEO optimisation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "AEO (Answer Engine Optimisation) optimises your content to appear in AI-generated answers from tools like ChatGPT, Google AI Overviews, and Perplexity. It combines structured data, authoritative content, and fast page speed to ensure your brand is cited by AI engines." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --linkedin-blue: #0A66C2;
+      --deep-navy:     #001935;
+      --royal-purple:  #6B46C1;
+      --slate-gray:    #626E7E;
+      --light-blue:    #E7F3FF;
+      --white:         #FFFFFF;
+      --border:        rgba(255,255,255,0.1);
+      --muted:         rgba(255,255,255,0.45);
+      --good:  #22c55e;
+      --ok:    #f59e0b;
+      --bad:   #ef4444;
+    }
+
+    body {
+      background: var(--deep-navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 0%,  rgba(10,102,194,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 100%, rgba(107,70,193,0.10) 0%, transparent 70%);
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-divider { width: 1px; height: 26px; background: var(--border); }
+
+    .logo-sub {
+      font-family: 'Inter', sans-serif; font-weight: 400;
+      font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em;
+    }
+
+    .header-tag {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--royal-purple);
+      background: rgba(107,70,193,0.15); border: 1px solid rgba(107,70,193,0.35);
+      padding: 5px 14px; border-radius: 20px;
+    }
+
+    /* ── MAIN ── */
+    main { position: relative; z-index: 5; max-width: 860px; margin: 0 auto; padding: 68px 24px 80px; }
+
+    /* ── HERO ── */
+    .hero { text-align: center; margin-bottom: 48px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--linkedin-blue);
+      background: rgba(10,102,194,0.12); border: 1px solid rgba(10,102,194,0.25);
+      padding: 5px 16px; border-radius: 20px; margin-bottom: 22px;
+    }
+
+    /* H1 crafted for "website speed test" keyword cluster */
+    .hero h1 {
+      font-family: 'Poppins', sans-serif; font-weight: 800;
+      font-size: clamp(1.9rem, 4.5vw, 3.1rem);
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 14px;
+    }
+
+    .hero h1 span { color: var(--royal-purple); }
+
+    .hero p { font-size: 1rem; color: var(--muted); max-width: 480px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── INPUT ── */
+    .input-card {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: 16px; padding: 10px; display: flex; gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s; margin-bottom: 16px;
+    }
+
+    .input-card:focus-within {
+      border-color: var(--linkedin-blue);
+      box-shadow: 0 0 0 3px rgba(10,102,194,0.2);
+    }
+
+    .url-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--white); font-family: 'Inter', monospace; font-size: 0.9rem; padding: 10px 16px;
+    }
+
+    .url-input::placeholder { color: rgba(255,255,255,0.28); }
+
+    .analyze-btn {
+      background: var(--linkedin-blue); color: var(--white); border: none;
+      border-radius: 10px; padding: 12px 28px;
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.04em; white-space: nowrap;
+    }
+
+    .analyze-btn:hover  { background: #0958a8; transform: translateY(-1px); }
+    .analyze-btn:active { transform: translateY(0); }
+    .analyze-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    .device-tabs { display: flex; gap: 8px; justify-content: center; }
+
+    .device-tab {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 8px; padding: 7px 20px; font-size: 0.78rem; font-family: 'Inter', sans-serif;
+      font-weight: 500; cursor: pointer; transition: all 0.2s;
+    }
+
+    .device-tab.active { background: rgba(10,102,194,0.15); border-color: var(--linkedin-blue); color: var(--linkedin-blue); }
+
+    /* ── LOADING ── */
+    #loading { display: none; text-align: center; padding: 64px 0; }
+
+    .spinner {
+      width: 52px; height: 52px;
+      border: 3px solid rgba(255,255,255,0.08); border-top-color: var(--linkedin-blue);
+      border-radius: 50%; animation: spin 0.9s linear infinite; margin: 0 auto 20px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-label {
+      font-family: 'Poppins', sans-serif; font-size: 0.68rem; font-weight: 700;
+      color: var(--linkedin-blue); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .loading-step { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── RESULTS ── */
+    #results { display: none; animation: fadeUp 0.4s ease; margin-top: 40px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .analyzed-url {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: 'Inter', monospace; font-size: 0.78rem; color: var(--muted);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 20px; margin-bottom: 32px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .url-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); flex-shrink: 0; }
+
+    /* Score cards */
+    .scores-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 26px; }
+    @media (max-width: 560px) { .scores-row { grid-template-columns: repeat(2,1fr); } }
+
+    .score-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 14px 18px; text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .score-card:hover { transform: translateY(-2px); border-color: rgba(10,102,194,0.4); }
+
+    .score-ring-wrap { position: relative; width: 72px; height: 72px; margin: 0 auto 12px; }
+    .score-ring-wrap svg { transform: rotate(-90deg); }
+
+    .score-number {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700;
+    }
+
+    .score-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+    /* Metrics */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 30px; }
+    @media (max-width: 560px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+
+    .metric-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; border-left: 3px solid transparent;
+    }
+
+    .metric-card.good { border-left-color: var(--good); }
+    .metric-card.ok   { border-left-color: var(--ok); }
+    .metric-card.bad  { border-left-color: var(--bad); }
+
+    .metric-name { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .metric-value { font-family: 'Poppins', sans-serif; font-size: 1.55rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .metric-value.good { color: var(--good); }
+    .metric-value.ok   { color: var(--ok); }
+    .metric-value.bad  { color: var(--bad); }
+    .metric-desc { font-size: 0.7rem; color: var(--muted); }
+
+    /* Section header */
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .section-header h2 { font-family: 'Poppins', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+    .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* Opportunities */
+    .opp-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+
+    .opp-item {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .opp-item:hover { border-color: rgba(10,102,194,0.4); }
+
+    .opp-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
+    .opp-icon.warn  { background: rgba(245,158,11,0.15); }
+    .opp-icon.error { background: rgba(239,68,68,0.15); }
+    .opp-icon.info  { background: rgba(10,102,194,0.15); }
+
+    .opp-content { flex: 1; }
+    .opp-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 3px; }
+    .opp-desc  { font-size: 0.775rem; color: var(--muted); line-height: 1.55; }
+
+    .opp-saving {
+      flex-shrink: 0; font-family: 'Inter', monospace; font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 6px;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);
+      color: var(--ok); white-space: nowrap;
+    }
+
+    /* Summary */
+    .summary-box {
+      background: rgba(107,70,193,0.08); border: 1px solid rgba(107,70,193,0.3);
+      border-radius: 16px; padding: 26px; position: relative; overflow: hidden; margin-bottom: 30px;
+    }
+
+    .summary-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--royal-purple), var(--linkedin-blue));
+    }
+
+    .summary-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--royal-purple); margin-bottom: 10px; }
+    .summary-text { font-size: 0.9rem; line-height: 1.75; color: rgba(255,255,255,0.85); white-space: pre-wrap; }
+
+    /* ── CTA BANNER ─────────────────────────────────────────────────────────── */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(10,102,194,0.15) 0%, rgba(107,70,193,0.15) 100%);
+      border: 1px solid rgba(107,70,193,0.4); border-radius: 20px;
+      padding: 36px 40px; margin-bottom: 30px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      position: relative; overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--linkedin-blue), var(--royal-purple));
+    }
+
+    .cta-left { flex: 1; }
+
+    .cta-eyebrow {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--royal-purple); margin-bottom: 8px;
+    }
+
+    .cta-title {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.25rem;
+      line-height: 1.25; margin-bottom: 8px;
+    }
+
+    .cta-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; max-width: 420px; }
+
+    .cta-btn {
+      flex-shrink: 0; background: var(--royal-purple); color: var(--white); border: none;
+      border-radius: 12px; padding: 14px 28px;
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.15s; letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .cta-btn:hover { background: #5a3aa8; transform: translateY(-2px); }
+
+    @media (max-width: 640px) {
+      .cta-banner { flex-direction: column; padding: 28px 24px; }
+      .cta-btn { width: 100%; text-align: center; }
+    }
+
+    /* ── MODAL / FORM ───────────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,10,30,0.85); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #0d1f35; border: 1px solid rgba(107,70,193,0.4);
+      border-radius: 20px; padding: 40px; width: 100%; max-width: 500px;
+      position: relative; animation: fadeUp 0.3s ease;
+    }
+
+    .modal::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--royal-purple), var(--linkedin-blue));
+      border-radius: 20px 20px 0 0;
+    }
+
+    .modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: transparent; border: none; color: var(--muted);
+      font-size: 1.4rem; cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--white); }
+
+    .modal-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--royal-purple); margin-bottom: 8px; }
+    .modal-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 6px; }
+    .modal-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 28px; line-height: 1.55; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .form-group input {
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      border-radius: 10px; padding: 11px 16px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus { border-color: var(--linkedin-blue); box-shadow: 0 0 0 3px rgba(10,102,194,0.2); }
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .form-submit {
+      width: 100%; background: var(--linkedin-blue); color: var(--white); border: none;
+      border-radius: 12px; padding: 14px; margin-top: 6px;
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.1s; letter-spacing: 0.04em;
+    }
+
+    .form-submit:hover { background: #0958a8; transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .form-note { font-size: 0.7rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.5; }
+
+    .form-success {
+      display: none; text-align: center; padding: 20px 0;
+    }
+
+    .form-success .tick { font-size: 2.5rem; margin-bottom: 12px; }
+    .form-success h3 { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .form-success p { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+
+    /* Error */
+    #error-box {
+      display: none; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 12px; padding: 16px 22px; text-align: center; color: #fca5a5;
+      font-size: 0.875rem; margin-top: 18px;
+    }
+
+    .good { color: var(--good); }
+    .ok   { color: var(--ok); }
+    .bad  { color: var(--bad); }
+
+    /* ── SEO CONTENT SECTION ─────────────────────────────────────────────────── */
+    .seo-section {
+      margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border);
+    }
+
+    .seo-section h2 {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem;
+      margin-bottom: 14px; letter-spacing: -0.01em;
+    }
+
+    .seo-section h3 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem; margin: 28px 0 8px; }
+
+    .seo-section p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 10px; }
+
+    .faq-item { margin-bottom: 24px; }
+    .faq-q { font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .faq-a { font-size: 0.875rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+    /* Footer */
+    footer {
+      position: relative; z-index: 5; text-align: center; padding: 28px;
+      color: rgba(255,255,255,0.22); font-size: 0.72rem;
+      border-top: 1px solid var(--border); letter-spacing: 0.04em; margin-top: 48px;
+    }
+
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    footer strong { color: rgba(255,255,255,0.42); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ────────────────────────────────────────────────────────────── -->
+<header>
+  <a href="/" class="logo" aria-label="Sonder Digital home">
+    <img src="sonder-logo.png" alt="Sonder Digital" />
+    <div class="logo-divider" aria-hidden="true"></div>
+    <span class="logo-sub">Speed Analyser</span>
+  </a>
+  <div class="header-tag" aria-hidden="true">Free Tool</div>
+</header>
+
+<!-- ── MAIN ──────────────────────────────────────────────────────────────── -->
+<main>
+  <div class="hero">
+    <div class="hero-eyebrow" aria-hidden="true">⚡ Free Website Speed Test</div>
+    <h1>Check your <span>page speed</span><br>& Core Web Vitals instantly</h1>
+    <p>Enter any URL to get LCP, FCP, CLS, TBT scores and expert SEO &amp; AEO recommendations — powered by AI.</p>
+  </div>
+
+  <div class="input-card" role="search">
+    <label for="urlInput" class="sr-only">Website URL to analyse</label>
+    <input
+      class="url-input" id="urlInput" type="url"
+      placeholder="https://yourwebsite.com"
+      aria-label="Enter a URL to test page speed"
+      autocomplete="url"
+    />
+    <button class="analyze-btn" id="analyzeBtn" onclick="analyze()" aria-label="Run speed test">
+      Run Speed Test
+    </button>
+  </div>
+
+  <div class="device-tabs" role="group" aria-label="Device type">
+    <button class="device-tab active" onclick="setDevice(this,'mobile')">📱 Mobile</button>
+    <button class="device-tab" onclick="setDevice(this,'desktop')">🖥 Desktop</button>
+  </div>
+
+  <div id="error-box" role="alert"></div>
+
+  <div id="loading" aria-live="polite" aria-label="Analysing website">
+    <div class="spinner" aria-hidden="true"></div>
+    <div class="loading-label">Analysing</div>
+    <div class="loading-step" id="loadingStep">Fetching page data…</div>
+  </div>
+
+  <!-- ── RESULTS ── -->
+  <div id="results" aria-live="polite">
+    <div class="analyzed-url">
+      <span class="url-dot" aria-hidden="true"></span>
+      <span id="analyzedUrl"></span>
+    </div>
+
+    <div class="scores-row" id="scoresRow"></div>
+    <div class="metrics-grid" id="metricsGrid"></div>
+
+    <div class="section-header"><h2>Opportunities</h2></div>
+    <div class="opp-list" id="oppList"></div>
+
+    <div class="section-header"><h2>Expert Analysis</h2></div>
+    <div class="summary-box">
+      <div class="summary-eyebrow">✦ AI Insights</div>
+      <div class="summary-text" id="summaryText"></div>
+    </div>
+
+    <!-- ── CTA BANNER ── -->
+    <div class="cta-banner" id="ctaBanner">
+      <div class="cta-left">
+        <div class="cta-eyebrow">✦ SEO &amp; AEO Optimisation</div>
+        <div class="cta-title">Ready to turn these insights<br>into measurable growth?</div>
+        <div class="cta-desc">Our team at Sonder Digital specialises in page speed, Core Web Vitals remediation, and Answer Engine Optimisation — so your brand ranks in both Google and AI search.</div>
+      </div>
+      <button class="cta-btn" onclick="openModal()" aria-haspopup="dialog">
+        Get a Free Consultation →
+      </button>
+    </div>
+  </div><!-- /results -->
+
+  <!-- ── SEO CONTENT ── -->
+  <section class="seo-section" aria-label="About website speed testing">
+    <h2>Why website speed matters for SEO in 2025</h2>
+    <p>Google uses Core Web Vitals as a confirmed ranking factor. Sites that load faster rank higher, retain more visitors, and convert at a higher rate. Our free website speed test gives you the same data as Google PageSpeed Insights — powered by AI analysis.</p>
+
+    <h3>What does this website speed test measure?</h3>
+    <p>This tool analyses the key performance metrics that Google's Lighthouse and Core Web Vitals framework use to evaluate your pages:</p>
+    <p><strong>LCP (Largest Contentful Paint)</strong> — How fast your main content loads. Target: under 2.5 seconds.</p>
+    <p><strong>FCP (First Contentful Paint)</strong> — When the first content appears on screen. Target: under 1.8 seconds.</p>
+    <p><strong>TBT (Total Blocking Time)</strong> — How long your page is unresponsive to user input. Target: under 200 ms.</p>
+    <p><strong>CLS (Cumulative Layout Shift)</strong> — How much your page layout jumps around. Target: under 0.1.</p>
+    <p><strong>TTI (Time to Interactive)</strong> — When your page becomes fully interactive. Target: under 3.8 seconds.</p>
+
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+      <div class="faq-q">What is a good PageSpeed Insights score?</div>
+      <div class="faq-a">Google rates 90–100 as Good (green), 50–89 as Needs Improvement (amber), and 0–49 as Poor (red). Aim for 90+ on desktop and 70+ on mobile for strong SEO performance.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does page speed directly affect Google rankings?</div>
+      <div class="faq-a">Yes. Since Google's Page Experience update, Core Web Vitals are a confirmed ranking signal. Faster pages also have lower bounce rates, higher dwell time, and better conversion rates — all of which indirectly improve SEO.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is AEO (Answer Engine Optimisation)?</div>
+      <div class="faq-a">AEO optimises your content and technical setup so AI engines like ChatGPT, Google AI Overviews, and Perplexity cite your brand when answering user queries. It requires fast page speed, structured data, and authoritative content — all areas Sonder Digital specialises in.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How is this different from Google PageSpeed Insights?</div>
+      <div class="faq-a">Google PageSpeed Insights runs real Lighthouse audits in Google's infrastructure. This tool uses AI to estimate performance based on known site characteristics and provides the same categories of recommendations — ideal for quick benchmarking and identifying priority areas before a full audit.</div>
+    </div>
+  </section>
+</main>
+
+<!-- ── LEAD FORM MODAL ─────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+
+    <div id="formView">
+      <div class="modal-eyebrow">✦ Free Consultation</div>
+      <h2 class="modal-title" id="modalTitle">Let's fix your page speed — and grow your rankings</h2>
+      <p class="modal-sub">Fill in your details and a Sonder Digital strategist will reach out within one business day.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Full Name *</label>
+          <input id="f-name" type="text" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-group">
+          <label for="f-company">Company</label>
+          <input id="f-company" type="text" placeholder="Acme Corp" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-title">Job Title</label>
+          <input id="f-title" type="text" placeholder="Marketing Director" />
+        </div>
+        <div class="form-group">
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" type="tel" placeholder="+1 555 000 0000" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="f-email">Work Email *</label>
+        <input id="f-email" type="email" placeholder="jane@company.com" required />
+      </div>
+
+      <button class="form-submit" id="formSubmitBtn" onclick="submitLead()">
+        Book My Free Consultation →
+      </button>
+      <p class="form-note">No spam. No commitment. We'll send you a personalised speed &amp; SEO roadmap.</p>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="tick">✅</div>
+      <h3>You're booked in!</h3>
+      <p>A Sonder Digital strategist will reach out to you within one business day with your personalised SEO &amp; AEO roadmap.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+<footer>
+  <strong>SONDER DIGITAL</strong> ·
+  <a href="https://sonderdigital.com" target="_blank" rel="noopener">sonderdigital.com</a> ·
+  <a href="/cdn-cgi/l/email-protection#254757444b4165564a4b414057414c424c5144490b464a48"><span class="__cf_email__" data-cfemail="d8baaab9b6bc98abb7b6bcbdaabcb1bfb1acb9b4f6bbb7b5">[email&#160;protected]</span></a> ·
+  Results are AI-estimated and for benchmarking purposes only.
+</footer>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+</style>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ── STATE ──────────────────────────────────────────────────────────────── */
+  let selectedDevice = 'mobile';
+  let lastAnalyzedUrl = '';
+  let lastScores = {};
+
+  /* ── DEVICE TABS ────────────────────────────────────────────────────────── */
+  function setDevice(el, device) {
+    document.querySelectorAll('.device-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    selectedDevice = device;
+  }
+
+  /* ── HELPERS ────────────────────────────────────────────────────────────── */
+  function getScoreColor(s) { return s >= 90 ? '#22c55e' : s >= 50 ? '#f59e0b' : '#ef4444'; }
+  function getScoreClass(s) { return s >= 90 ? 'good' : s >= 50 ? 'ok' : 'bad'; }
+
+  function buildRing(score) {
+    const color = getScoreColor(score);
+    const r = 30, cx = 36, cy = 36, circ = 2 * Math.PI * r;
+    const dash = (score / 100) * circ;
+    return `<div class="score-ring-wrap">
+      <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="5"
+          stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/>
+      </svg>
+      <div class="score-number ${getScoreClass(score)}">${score}</div>
+    </div>`;
+  }
+
+  /* ── LOADING STEPS ──────────────────────────────────────────────────────── */
+  const STEPS = [
+    'Fetching page metadata…',
+    'Estimating Core Web Vitals…',
+    'Identifying render-blocking resources…',
+    'Checking image & script sizes…',
+    'Scoring accessibility & SEO…',
+    'Generating recommendations…',
+  ];
+  let stepInterval;
+  function startSteps() {
+    let i = 0;
+    const el = document.getElementById('loadingStep');
+    el.textContent = STEPS[0];
+    stepInterval = setInterval(() => { i = (i + 1) % STEPS.length; el.textContent = STEPS[i]; }, 1800);
+  }
+  function stopSteps() { clearInterval(stepInterval); }
+
+  /* ── ANALYSE ────────────────────────────────────────────────────────────── */
+  async function analyze() {
+    const url = document.getElementById('urlInput').value.trim();
+    if (!url || !url.startsWith('http')) {
+      showError('Please enter a valid URL starting with https://');
+      return;
+    }
+
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('error-box').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('analyzeBtn').disabled = true;
+    startSteps();
+
+    // Fire-and-forget: log this analysis attempt
+    const timestamp = new Date().toISOString();
+    logAnalysis({ url, device: selectedDevice, timestamp, userAgent: navigator.userAgent, referrer: document.referrer });
+
+    try {
+      const res = await fetch('/.netlify/functions/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, device: selectedDevice }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Analysis failed');
+
+      stopSteps();
+      document.getElementById('loading').style.display = 'none';
+      lastAnalyzedUrl = url;
+      lastScores = result.scores;
+
+      // Update the log with actual scores
+      logAnalysis({ url, device: selectedDevice, timestamp, scores: result.scores, userAgent: navigator.userAgent, referrer: document.referrer });
+
+      renderResults(url, result);
+    } catch (err) {
+      stopSteps();
+      document.getElementById('loading').style.display = 'none';
+      showError('Analysis failed. Please try again with a valid URL.');
+      console.error(err);
+    }
+
+    document.getElementById('analyzeBtn').disabled = false;
+  }
+
+  /* ── LOG ANALYSIS (non-blocking) ────────────────────────────────────────── */
+  async function logAnalysis(payload) {
+    try {
+      await fetch('/.netlify/functions/log-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (_) { /* never block the UX */ }
+  }
+
+  /* ── RENDER ─────────────────────────────────────────────────────────────── */
+  function renderResults(url, data) {
+    document.getElementById('analyzedUrl').textContent = `${url}  ·  ${selectedDevice}`;
+
+    const scoreLabels = { performance: 'Performance', accessibility: 'Accessibility', bestPractices: 'Best Practices', seo: 'SEO' };
+    document.getElementById('scoresRow').innerHTML = Object.entries(data.scores).map(([k, v]) => `
+      <div class="score-card">${buildRing(v)}<div class="score-label">${scoreLabels[k]}</div></div>`).join('');
+
+    const metricMeta = {
+      fcp: { label: 'FCP', name: 'First Contentful Paint' },
+      lcp: { label: 'LCP', name: 'Largest Contentful Paint' },
+      tbt: { label: 'TBT', name: 'Total Blocking Time' },
+      cls: { label: 'CLS', name: 'Cumulative Layout Shift' },
+      si:  { label: 'SI',  name: 'Speed Index' },
+      tti: { label: 'TTI', name: 'Time to Interactive' },
+    };
+    const m = data.metrics;
+    document.getElementById('metricsGrid').innerHTML = Object.entries(metricMeta).map(([k, meta]) => `
+      <div class="metric-card ${m[k + 'Rating'] || ''}">
+        <div class="metric-name">${meta.label}</div>
+        <div class="metric-value ${m[k + 'Rating'] || ''}">${m[k]}</div>
+        <div class="metric-desc">${meta.name}</div>
+      </div>`).join('');
+
+    const icons = { warn: '⚠️', error: '🔴', info: '💡' };
+    document.getElementById('oppList').innerHTML = data.opportunities.map(o => `
+      <div class="opp-item">
+        <div class="opp-icon ${o.severity}">${icons[o.severity] || '💡'}</div>
+        <div class="opp-content">
+          <div class="opp-title">${o.title}</div>
+          <div class="opp-desc">${o.description}</div>
+        </div>
+        ${o.saving ? `<div class="opp-saving">−${o.saving}</div>` : ''}
+      </div>`).join('');
+
+    document.getElementById('summaryText').textContent = data.summary;
+    document.getElementById('results').style.display = 'block';
+  }
+
+  /* ── MODAL ──────────────────────────────────────────────────────────────── */
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.getElementById('formView').style.display = 'block';
+    document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('f-name').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  // Close on overlay click
+  document.getElementById('modalOverlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── LEAD SUBMIT ────────────────────────────────────────────────────────── */
+  async function submitLead() {
+    const name    = document.getElementById('f-name').value.trim();
+    const company = document.getElementById('f-company').value.trim();
+    const title   = document.getElementById('f-title').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+
+    const btn = document.getElementById('formSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      await fetch('/.netlify/functions/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, company, title, email, phone,
+          analyzedUrl: lastAnalyzedUrl,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (_) { /* still show success — log is best-effort */ }
+
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Book My Free Consultation →';
+  }
+
+  /* ── ERROR ──────────────────────────────────────────────────────────────── */
+  function showError(msg) {
+    const el = document.getElementById('error-box');
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'block';
+  }
+
+  /* ── ENTER KEY ───────────────────────�
