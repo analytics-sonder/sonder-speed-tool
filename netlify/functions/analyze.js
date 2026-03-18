@@ -63,7 +63,7 @@ Provide 4-6 opportunities. Make scores realistic for the site type. Device: ${de
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-opus-4-6",
+        model: "claude-sonnet-4-5",
         max_tokens: 1000,
         messages: [{ role: "user", content: prompt }],
       }),
